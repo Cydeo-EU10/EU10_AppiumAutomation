@@ -21,9 +21,10 @@ public class CalculatorPage {
     @AndroidFindBy(id = "com.google.android.calculator:id/result_final")
     public MobileElement result;
 
+    /*
     public void multiply() {
         multiply.click();
-    }
+    } */
 
     public void clickSingleDigit(int digit) {
         String id = "com.google.android.calculator:id/digit_" + digit;
