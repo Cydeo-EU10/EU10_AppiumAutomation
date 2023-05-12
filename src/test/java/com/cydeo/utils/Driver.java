@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -80,6 +81,27 @@ public class Driver {
                         e.printStackTrace();
                     }
                     driver = new AndroidDriver<>(url, desiredCapabilities2);
+                    break;
+                case "swagLab-remote-iphone":
+                    MutableCapabilities capsIphone = new MutableCapabilities();
+                    capsIphone.setCapability("platformName", "iOS");
+                    capsIphone.setCapability("appium:deviceName", "iPhone.*");
+                    capsIphone.setCapability("appium:deviceOrientation", "portrait");
+                    capsIphone.setCapability("appium:automationName", "XCUITest");
+               //     DesiredCapabilities desiredCapabilities3 = new DesiredCapabilities();
+               //     desiredCapabilities3.setCapability("platformName", "iOS");
+               //     desiredCapabilities3.setCapability("appium:automationName", "xcuitest");
+               //     desiredCapabilities3.setCapability(MobileCapabilityType.APP, "https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk"); --> for android app
+                    capsIphone.setCapability(MobileCapabilityType.APP,"https://github.com/saucelabs/sample-app-mobile/releases/download/2.7.1/iOS.RealDevice.SauceLabs.Mobile.Sample.app.2.7.1.ipa");  // iphone application
+                    // for most of the applications, you need to tell Appium, app package (location, in mobile phone), app Activity for it
+                   // desiredCapabilities3.setCapability("appPackage","com.swaglabsmobileapp");
+                   // desiredCapabilities3.setCapability("appActivity","com.swaglabsmobileapp.SplashActivity");
+                    try {
+                        url = new URL("PUT YOUR HUB INFO");
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                    driver = new AndroidDriver<>(url, capsIphone);
                     break;
             }
         }
