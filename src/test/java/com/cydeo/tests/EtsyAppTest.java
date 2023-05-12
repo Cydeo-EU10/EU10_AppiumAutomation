@@ -5,6 +5,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
@@ -13,7 +14,7 @@ import java.net.URL;
 public class EtsyAppTest {
     AppiumDriver<MobileElement> driver;
     @Test
-    public void Test() throws MalformedURLException {
+    public void Test() throws MalformedURLException, InterruptedException {
 
         DesiredCapabilities caps = new DesiredCapabilities();
         // key and value: setUp for appium
@@ -33,7 +34,18 @@ public class EtsyAppTest {
 
         System.out.println(driver.getDeviceTime());
 
-        driver.closeApp();
+        driver.findElement(By.id("com.etsy.android:id/btn_sign_in_dialog")).click(); // sign-in button
+        Thread.sleep(2000);
+
+        driver.findElement(By.id("com.etsy.android:id/clg_text_input")).sendKeys("areatha@uspeakw.com");
+        Thread.sleep(2000);
+
+        driver.hideKeyboard();  // to hide keyboard of application, it is preventing continue button
+        Thread.sleep(2000);
+
+        driver.findElement(By.id("com.etsy.android:id/sign_in_button_email")).click(); // continue button
+
+       // driver.closeApp();
     }
 
 }
